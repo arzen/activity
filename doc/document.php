@@ -11,6 +11,9 @@
 \tableofcontents
 \section user_module  用户模块
 主要使用QQ与新浪微博用户进行登录，也可以注册一个帐号。
+- 使用第三方登录时，自动创建一个帐号，与第3方帐号进行关联，密码为空
+- 用帐号、密码登录时，密码不能为空。
+- 用户帐号为5位以上的数字。
 
 \subsection user_reg 用户注册
 调用地址：user/reg
@@ -21,21 +24,42 @@
 
 参数名  | 中文描述	| 类型（精度） | 是否必填 
 ------------- | ----------- | -------------| -------------
-name  | 用户名	| String | 必填
 pwd  | 密码	| String | 必填
 
 成功返回格式
 \code{.php}
-
+{
+    "ver": "1",//API版本
+    "code": 200,//成功结果
+    "data": {//返回结果内容主体
+        "id": "364584"
+    }
+}
 \endcode
 
 失败返回格式
 \code{.php}
-
+{
+    "ver": "1",//API版本
+    "code": 404,//失败结果
+    "data": {//返回结果内容主体
+        "err_code": "201012",
+        "msg": "用户密码不能为空"
+    }
+}
 \endcode
 
 \page coding_standard  规范与约定
 \tableofcontents
+\section respone_code_rule 返回结果集中code的编码
+
+参考Http的respone code
+
+描述  | 编码
+------------- | ----------- 
+成功  | 200
+失败 | 404
+
 \section error_code_rule 错误编码规范
 
 错误代码使用6位16进制数字表示，最左边的1位表示错误级别，接下两位代表模块编码，最后3位标识具体的错误编号。通过错误代码即可快速定位出现问题的位置。
