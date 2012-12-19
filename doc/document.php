@@ -2,30 +2,14 @@
 /*! \mainpage 
 \tableofcontents
 
-Some general info.
-
-This manual is divided in the following sections:
-- \subpage intro
-- \subpage advanced "Advanced usage"
-
 
 \section dev 开发指引
-标题  |	版本	
-------------- | -----------
-\ref api| 1.0
-
-\page intro Introduction
-This page introduces the user to the topic.
-Now you can proceed to the \ref advanced "advanced section".
-
-\page advanced Advanced Usage
-This page is for advanced users.
-Make sure you have first read \ref intro "the introduction".
-
+- \subpage api
+- \subpage coding_standard
 
 \page api  接口说明
 \tableofcontents
-\subpage user_module  用户模块
+\section user_module  用户模块
 \subsection user_reg 用户注册
 调用地址：user/reg
 
