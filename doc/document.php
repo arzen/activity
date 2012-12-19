@@ -10,6 +10,8 @@
 \page api  接口说明
 \tableofcontents
 \section user_module  用户模块
+主要使用QQ与新浪微博用户进行登录，也可以注册一个帐号。
+
 \subsection user_reg 用户注册
 调用地址：user/reg
 
