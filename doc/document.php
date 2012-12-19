@@ -29,6 +29,35 @@ pwd  | 密码	| String | 必填
 成功返回格式
 \code{.php}
 {
+    "ver": "1",
+    "code": 200,
+    "data": {
+        "id": "364584"
+    }
+}
+\endcode
+
+失败返回格式
+\code{.php}
+{
+    "ver": "1",
+    "code": 404,
+    "data": {
+        "err_code": "201012",
+        "msg": "用户密码不能为空"
+    }
+}
+\endcode
+
+\page coding_standard  规范与约定
+\tableofcontents
+\section respone_format Respone格式
+
+返回的结果集范例，包含成功与失败。
+
+成功返回格式
+\code{.php}
+{
     "ver": "1",//API版本
     "code": 200,//成功结果
     "data": {//返回结果内容主体
@@ -49,11 +78,7 @@ pwd  | 密码	| String | 必填
 }
 \endcode
 
-\page coding_standard  规范与约定
-\tableofcontents
-\section respone_code_rule 返回结果集中code的编码
-
-参考Http的respone code
+Respone code 的定义
 
 描述  | 编码
 ------------- | ----------- 
