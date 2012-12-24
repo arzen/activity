@@ -22,7 +22,7 @@
 
 参数：
 
-参数名  | 中文描述	| 类型（精度） | 是否必填 
+参数名  | 描述	| 类型（精度） | 是否必填 
 ------------- | ----------- | -------------| -------------
 pwd  | 密码	| String | 必填
 
@@ -32,7 +32,43 @@ pwd  | 密码	| String | 必填
     "ver": "1",
     "code": 200,
     "data": {
-        "id": "364584"
+        "id": "364584",
+        "access_token": "eewrw2e42fdsaw435435dsfda"
+    }
+}
+\endcode
+
+失败返回格式
+\code{.php}
+{
+    "ver": "1",
+    "code": 404,
+    "data": {
+        "err_code": "201012",
+        "msg": "用户密码不能为空"
+    }
+}
+\endcode
+
+\subsection user_login 用户登录
+调用地址：user/login
+
+请求方式：GET
+
+参数：
+
+参数名  | 描述	| 类型（精度） | 是否必填 
+------------- | ----------- | -------------| -------------
+username  | 用户名	| String | 必填
+pwd  | 密码	| String | 必填
+
+成功返回格式
+\code{.php}
+{
+    "ver": "1",
+    "code": 200,
+    "data": {
+        "access_token": "eewrw2e42fdsaw435435dsfda"
     }
 }
 \endcode
