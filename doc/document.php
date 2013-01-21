@@ -2,10 +2,48 @@
 /*! \mainpage 
 \tableofcontents
 
+- 提供活动聚会信息
+- 提供打折优惠信息
 
 \section dev 开发指引
+- \subpage module
 - \subpage api
 - \subpage coding_standard
+
+\page module  模块设计
+
+\section user_module  用户模块
+- 用户名，密码，性别，生日，名称，电话号码，邮箱，QQ，状态，IP, GPS
+
+- 关系链
+
+发起人，接受者
+
+- 短消息
+
+内容，类型，发送者，接受者，状态（0-未读，1-已读）
+
+\section activity_module  活动模块
+- 标题，介绍，时间，地点，公开/私有，地图标示，区域,类别，允许人数，已报名人数，状态
+
+- 活动分类
+
+名称
+
+- 活动报名者
+
+活动ID，用户ID
+
+\section discount_module  打折优惠信息
+- 标题，介绍，时间，地点，公开/私有，地图标示，区域, 类别，状态
+
+\section comment_module  评论信息
+- 标题，介绍, 作者，类别，原文ID，时间
+
+- 打折分类
+
+名称
+
 
 \page api  接口说明
 \tableofcontents
