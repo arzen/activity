@@ -37,4 +37,11 @@ class Area extends AppModel {
 			),
 		),
 	);
+	
+	function getAreas() {
+		$data = $this->find('all',array( 'fields' => array('id', 'name') ) );
+		$pattern = '{n}.'.$this->alias;
+		$data = Set::classicExtract($data,$pattern);
+		return $data;
+	}
 }

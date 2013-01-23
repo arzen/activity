@@ -12,9 +12,9 @@ class AreaTest extends CakeTestCase {
  *
  * @var array
  */
-	public $fixtures = array(
-		'app.area'
-	);
+// 	public $fixtures = array(
+// 		'app.area'
+// 	);
 
 /**
  * setUp method
@@ -31,14 +31,17 @@ class AreaTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
-		unset($this->Area);
+// 	public function tearDown() {
+// 		unset($this->Area);
 
-		parent::tearDown();
-	}
+// 		parent::tearDown();
+// 	}
 	
 	public function testArea() {
-		;
+		$data = array(
+				'name' => 'Futian',
+		);
+		$this->Area->save($data);
 	}
 
 }

@@ -32,4 +32,15 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+	public $code_success = 200;
+	public $code_error = 404;
+	
+	function jsonOutput($code, $data,$ver = 1) {
+		$this->set(array(
+				'ver' => $ver,
+				'code' => $code,
+				'data' => $data,
+				'_serialize' => array('ver','code', 'data')
+		));		
+	}
 }
