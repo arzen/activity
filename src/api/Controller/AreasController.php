@@ -45,26 +45,36 @@ class AreasController extends AppController {
 	}
 
 /**
- * edit method
+ * 修改区域名称
  *
- * @throws NotFoundException
+ * URL：/areas/edit/{id}.json
+ * Method:POST
+ * 参数：
+ * name	string 区域名称
+ * 
  * @param string $id
  * @return void
  */
 	public function edit($id = null) {
 		$this->Area->id = $id;
 		if (!$this->Area->exists()) {
-			throw new NotFoundException(__('Invalid area'));
-		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+			pr($this->Area->exists());
+			$data = $this->formatErrorData(207004, __("edit record not exist.") );
+			$this->jsonOutput($this->code_error, $data );
+		}else if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Area->save($this->request->data)) {
-				$this->Session->setFlash(__('The area has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$data = __("modify area name success");
+				$this->jsonOutput($this->code_success, $data );
+				
 			} else {
-				$this->Session->setFlash(__('The area could not be saved. Please, try again.'));
+				$errors = $this->Area->validationErrors;
+				$data = $this->formatErrorData(207002, $errors['name'][0] );
+				$this->jsonOutput($this->code_error, $data );
+				
 			}
 		} else {
-			$this->request->data = $this->Area->read(null, $id);
+			$data = $this->formatErrorData(207003, __("http method unsupport") );
+			$this->jsonOutput($this->code_error, $data );
 		}
 	}
 
