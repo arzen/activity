@@ -28,10 +28,10 @@ class Area extends AppModel {
 	public $validate = array(
 		'name' => array(
 			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
+				'rule' => 'notempty',//array('notempty')
+				'message' => 'name not empty',
+				'allowEmpty' => false,
+				'required' => true,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),

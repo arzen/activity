@@ -43,4 +43,12 @@ class AppController extends Controller {
 				'_serialize' => array('ver','code', 'data')
 		));		
 	}
+	
+	function formatErrorData($err_code, $msg) {
+		return array(
+				'err_code'=>$err_code,
+				'msg'=>$msg,
+				
+				);
+	}
 }

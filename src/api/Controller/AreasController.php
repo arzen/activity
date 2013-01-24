@@ -11,6 +11,7 @@ class AreasController extends AppController {
 /**
  * 取出所有区域列表
  * URL：/areas/get_all_areas.json
+ * Method:GET
  * 
  * @return void
  */
@@ -20,18 +21,25 @@ class AreasController extends AppController {
 	}
 
 /**
- * add method
+ * 新建区域名称
+ * URL：/areas/add.json
+ * Method:POST
+ * 参数：
+ * name	string 区域名称
+ * 
  *
  * @return void
  */
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Area->create();
-			if ($this->Area->save($this->request->data)) {
-				$this->Session->setFlash(__('The area has been saved'));
-				$this->redirect(array('action' => 'index'));
+			if ($this->Area->save($this->request->data, array('validate' => true) )) {
+				$data = __("create area success");
+				$this->jsonOutput($this->code_success, $data );
 			} else {
-				$this->Session->setFlash(__('The area could not be saved. Please, try again.'));
+				$errors = $this->Area->validationErrors;
+				$data = $this->formatErrorData(207001, $errors['name'][0] );
+				$this->jsonOutput($this->code_error, $data );
 			}
 		}
 	}

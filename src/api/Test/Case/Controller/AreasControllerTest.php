@@ -24,9 +24,6 @@ class AreasControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testIndex() {
-		$HttpSocket = new HttpSocket();
-		$results = $HttpSocket->get('http://www.google.com/search', 'q=cakephp');
-		pr($results);
 		
 	}
 
@@ -44,6 +41,12 @@ class AreasControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testAdd() {
+		$HttpSocket = new HttpSocket();
+		$data = array(
+					'name'=>'fsdd',
+				);
+		$results = $HttpSocket->post('http://localhost/arzen/activity/src/api/areas/add.json', $data);
+		pr($results);
 	}
 
 /**
