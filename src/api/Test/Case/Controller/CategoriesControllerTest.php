@@ -1,22 +1,20 @@
 <?php
-App::uses('AreasController', 'Controller');
-App::uses('HttpSocket', 'Network/Http');
+App::uses('CategoriesController', 'Controller');
 
 /**
- * AreasController Test Case
+ * CategoriesController Test Case
  *
  */
-class AreasControllerTest extends ControllerTestCase {
+class CategoriesControllerTest extends ControllerTestCase {
 
 /**
  * Fixtures
  *
  * @var array
  */
-// 	public $fixtures = array(
-// 		'app.area'
-// 	);
-
+	public $fixtures = array(
+		'app.category'
+	);
 
 /**
  * testIndex method
@@ -24,7 +22,6 @@ class AreasControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testIndex() {
-		
 	}
 
 /**
@@ -57,10 +54,6 @@ class AreasControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testDelete() {
-		$HttpSocket = new HttpSocket();
-		$data = array();
-		$results = $HttpSocket->post('http://localhost/arzen/activity/src/api/areas/delete/100.json', $data);
-		pr($results);
 	}
 
 }

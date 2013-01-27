@@ -40,7 +40,7 @@ class AreaTest extends CakeTestCase {
 	public function testArea() {
 		$data = array(
 				'name' => 'Futian',
-		);
+				);
 		$this->Area->save($data);
 	}
 

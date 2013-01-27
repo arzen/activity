@@ -58,7 +58,6 @@ class AreasController extends AppController {
 	public function edit($id = null) {
 		$this->Area->id = $id;
 		if (!$this->Area->exists()) {
-			pr($this->Area->exists());
 			$data = $this->formatErrorData(207004, __("edit record not exist.") );
 			$this->jsonOutput($this->code_error, $data );
 		}else if ($this->request->is('post') || $this->request->is('put')) {
@@ -79,26 +78,33 @@ class AreasController extends AppController {
 	}
 
 /**
- * delete method
+ * 删除区域名称
  *
- * @throws MethodNotAllowedException
- * @throws NotFoundException
+ * URL：/areas/delete/{id}.json
+ * Method:POST
+ *
  * @param string $id
  * @return void
  */
 	public function delete($id = null) {
 		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
+			$data = $this->formatErrorData(207005, __("http method unsupport") );
+			$this->jsonOutput($this->code_error, $data );
+		}else{
+			$this->Area->id = $id;
+			if (!$this->Area->exists()) {
+				$data = $this->formatErrorData(207006, __("delete record not exist.") );
+				$this->jsonOutput($this->code_error, $data );
+			}else if ( $this->Area->delete() ) {
+				$data = __("delete area name success");
+				$this->jsonOutput($this->code_success, $data );
+			}
+			else{
+				$data = $this->formatErrorData(207007, __("area was not deleted.") );
+				$this->jsonOutput($this->code_error, $data );
+				
+			}
+				
 		}
-		$this->Area->id = $id;
-		if (!$this->Area->exists()) {
-			throw new NotFoundException(__('Invalid area'));
-		}
-		if ($this->Area->delete()) {
-			$this->Session->setFlash(__('Area deleted'));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Area was not deleted'));
-		$this->redirect(array('action' => 'index'));
 	}
 }

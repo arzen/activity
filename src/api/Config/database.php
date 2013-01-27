@@ -2,12 +2,14 @@
 class DATABASE_CONFIG {
 
 	public $default = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'root',
-		'password' => '',
-		'database' => 'dev_activity',
+			'datasource' => 'Database/Mysql',
+			'persistent' => false,
+			'host' => 'localhost',
+			'login' => 'root',
+			'password' => '',
+			'database' => 'dev_activity',
+			'encoding' => 'utf8',
+				
 	);
 	
 	public $test = array(
@@ -17,6 +19,7 @@ class DATABASE_CONFIG {
 			'login' => 'root',
 			'password' => '',
 			'database' => 'test_dev_activity',
+			'encoding' => 'utf8',
 	);
 	
 }
