@@ -8,28 +8,19 @@ App::uses('AppController', 'Controller');
 class CategoriesController extends AppController {
 
 /**
- * index method
+ * 指定类型，取出该类型的所有分类名称
+ * URL：/categories/get_category_by_type.json
+ * 参数：
+ * t	string 0为活动信息，1为优惠信息, 默认为0
  *
  * @return void
  */
-	public function index() {
+	public function getCategoryByType() {
 		$this->Category->recursive = 0;
-		$this->set('categories', $this->paginate());
-	}
-
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		$this->Category->id = $id;
-		if (!$this->Category->exists()) {
-			throw new NotFoundException(__('Invalid category'));
-		}
-		$this->set('category', $this->Category->read(null, $id));
+		$params = $this->request->data;
+		$type = isset($params['t']) ? $params['t'] : 0 ;
+		$this->jsonOutput($this->code_success,  $this->Category->getCategoryByType($type) );
+		
 	}
 
 /**

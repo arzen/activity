@@ -30,7 +30,8 @@
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/areas/get_all_areas', array('controller' => 'areas', 'action' => 'getAllAreas'));
-
+	Router::connect('/categories/get_category_by_type', array('controller' => 'categories', 'action' => 'getCategoryByType'));
+	
 	
 //--------  REST API
 Router::parseExtensions();	

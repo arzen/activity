@@ -35,6 +35,8 @@ class AppController extends Controller {
 	public $code_success = 200;
 	public $code_error = 404;
 	
+	public $components = array('RequestHandler');
+	
 	function jsonOutput($code, $data,$ver = 1) {
 		$this->set(array(
 				'ver' => $ver,

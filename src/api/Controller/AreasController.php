@@ -7,7 +7,6 @@ App::uses('AppController', 'Controller');
  */
 class AreasController extends AppController {
 
-	public $components = array('RequestHandler');
 /**
  * 取出所有区域列表
  * URL：/areas/get_all_areas.json
@@ -88,7 +87,7 @@ class AreasController extends AppController {
  */
 	public function delete($id = null) {
 		if (!$this->request->is('post')) {
-			$data = $this->formatErrorData(207005, __("http method unsupport") );
+			$data = $this->formatErrorData(207005, __("http post method unsupport") );
 			$this->jsonOutput($this->code_error, $data );
 		}else{
 			$this->Area->id = $id;

@@ -1,5 +1,6 @@
 <?php
 App::uses('CategoriesController', 'Controller');
+App::uses('HttpSocket', 'Network/Http');
 
 /**
  * CategoriesController Test Case
@@ -12,9 +13,15 @@ class CategoriesControllerTest extends ControllerTestCase {
  *
  * @var array
  */
-	public $fixtures = array(
-		'app.category'
-	);
+// 	public $fixtures = array(
+// 		'app.category'
+// 	);
+	
+	private $socket;
+
+	function setup() {
+		$this->socket = new HttpSocket();
+	}
 
 /**
  * testIndex method
@@ -22,6 +29,12 @@ class CategoriesControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testIndex() {
+		$data = array(
+					't'=>'1',
+				);
+		$results = $this->socket->post('http://localhost/arzen/activity/src/api/categories/get_category_by_type.json', $data);
+		pr($results);
+		
 	}
 
 /**
