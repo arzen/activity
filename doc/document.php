@@ -23,8 +23,19 @@
 
 内容，类型，发送者，接受者，状态（0-未读，1-已读）
 
+- 区域
+
+名称
+
+area
+(name)
+
+
 \section activity_module  活动模块
 - 标题，介绍，时间，地点，公开/私有，地图标示，区域,类别，允许人数，已报名人数，状态
+(c_id,a_id,title,content,start_time,address,public(0私有，1公开),gps,peoples（0为不限）,attends,state[0待审核，1已审核，2已下架] )
+PARTITION BY HASH( MONTH(FROM_UNIXTIME( start_time, '%Y-%m-%d' )) )
+PARTITIONS 12;
 
 - 活动分类
 
@@ -36,6 +47,8 @@
 
 \section discount_module  打折优惠信息
 - 标题，介绍，时间，地点，公开/私有，地图标示，区域, 类别，状态
+(c_id,a_id,title,content,start_time,end_time,address,public(0私有，1公开),gps,state[0待审核，1已审核，2已下架] )
+
 
 \section comment_module  评论信息
 - 标题，介绍, 作者，类别，原文ID，时间
@@ -47,13 +60,135 @@
 
 \page api  接口说明
 \tableofcontents
-\section user_module  用户模块
+\subpage area_module
+\subpage user_module
+
+\page area_module  区域模块
+\tableofcontents
+
+\section get_all_areas 取出所有区域列表
+调用地址：/areas/get_all_areas.json
+
+请求方式：GET
+
+成功返回格式
+\code{.php}
+{
+    "ver": 1,
+    "code": 200,
+    "data": [
+        {
+            "id": "1",
+            "name": "Futian"
+        },
+        {
+            "id": "2",
+            "name": "Futian2"
+        }
+    ]
+}
+\endcode
+
+\section add_areas 新增区域名称
+调用地址：/areas/add.json
+
+请求方式：POST
+
+参数：
+
+参数名  | 描述	| 类型（精度） | 是否必填 
+------------- | ----------- | -------------| -------------
+name  | 区域名称	| String | 必填
+
+成功返回格式
+\code{.php}
+{
+    "ver": 1,
+    "code": 200,
+    "data": "create area success"
+}
+\endcode
+
+失败返回格式
+\code{.php}
+{
+    "ver": 1,
+    "code": 404,
+    "data": {
+        "err_code": 207001,
+        "msg": "name not empty"
+    }
+}
+\endcode
+
+\section edit_areas 编辑区域名称
+调用地址：/areas/edit/{id}.json
+
+请求方式：POST|PUT
+
+参数：
+
+参数名  | 描述	| 类型（精度） | 是否必填 
+------------- | ----------- | -------------| -------------
+name  | 区域名称	| String | 必填
+
+成功返回格式
+\code{.php}
+{
+    "ver": 1,
+    "code": 200,
+    "data": "modify area name success"
+}
+\endcode
+
+失败返回格式
+\code{.php}
+{
+    "ver": 1,
+    "code": 404,
+    "data": {
+        "err_code": 207004,
+        "msg": "edit record not exist."
+    }
+}
+\endcode
+
+\section delete_areas 删除区域名称
+调用地址：/areas/delete/{id}.json
+
+请求方式：POST
+
+成功返回格式
+\code{.php}
+{
+    "ver": 1,
+    "code": 200,
+    "data": "delete area name success"
+}
+\endcode
+
+失败返回格式
+\code{.php}
+{
+    "ver": 1,
+    "code": 404,
+    "data": {
+        "err_code": 207006,
+        "msg": "delete record not exist."
+    }
+}
+\endcode
+
+
+\page user_module  用户模块
+\tableofcontents
+
 主要使用QQ与新浪微博用户进行登录，也可以注册一个帐号。
 - 使用第三方登录时，自动创建一个帐号，与第3方帐号进行关联，密码为空
 - 用帐号、密码登录时，密码不能为空。
 - 用户帐号为5位以上的数字。
 
-\subsection user_reg 用户注册
+\section user_reg 用户注册
 调用地址：user/reg
 
 请求方式：GET
@@ -190,7 +325,19 @@ Respone code 的定义
 活动  | 04
 道具物品  | 05
 统计报表  | 06
+区域  | 07
 
+错误编码一览表
+
+编码  | 描述
+------------- | ----------- 
+207001  | 区域创建失败
+207002  | 区域名称编辑失败
+207003  | 编辑区域名称时，使用的HTTP的调用方法不支持
+207004  | 要编辑的区域ID数据不存在
+207005  | 删除区域名称时，使用的HTTP的调用方法不支持，仅支付POST方式
+207006  | 删除的区域ID数据不存在
+207007  | 删除区域名称时，由未知原因不能正常删除
 
 */
 
