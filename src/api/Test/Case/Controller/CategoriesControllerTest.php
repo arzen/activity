@@ -6,7 +6,7 @@ App::uses('HttpSocket', 'Network/Http');
  * CategoriesController Test Case
  *
  */
-class CategoriesControllerTest extends ControllerTestCase {
+class CategoriesControllerTest extends CakeTestCase {
 
 /**
  * Fixtures
@@ -29,6 +29,8 @@ class CategoriesControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testIndex() {
+		$this->markTestSkipped();
+		
 		$data = array(
 					't'=>'1',
 				);
@@ -51,6 +53,14 @@ class CategoriesControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testAdd() {
+		$this->markTestSkipped();
+		
+		$data = array(
+					'pid'=>1,
+					'name'=>"鞋子",
+		);
+		$results = $this->socket->post('http://localhost/arzen/activity/src/api/categories/add.json', $data);
+		pr($results);
 	}
 
 /**
@@ -59,6 +69,22 @@ class CategoriesControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testEdit() {
+		$params = array(
+					//'name'=>"鞋鞋子",
+		);
+		$results = $this->socket->post('http://localhost/arzen/activity/src/api/categories/edit/4.json', $params);
+		$data = json_decode($results);
+// 		$this->assertEquals('208002', $data->data->err_code);
+		pr($data->data);
+		
+		$params = array(
+					'name'=>"鞋鞋子",
+		);
+		$results = $this->socket->post('http://localhost/arzen/activity/src/api/categories/edit/99999.json', $params);
+		$data = json_decode($results);
+// 		$this->assertEquals('208003', $data->data->err_code);
+		
+		pr($data->data);
 	}
 
 /**

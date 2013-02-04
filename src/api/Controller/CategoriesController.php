@@ -24,7 +24,13 @@ class CategoriesController extends AppController {
 	}
 
 /**
- * add method
+ * 指定类型，取出该类型的所有分类名称
+ * URL：/categories/add.json
+ * Method:POST
+ * 
+ * 参数：
+ * pid	string 0为活动信息，1为优惠信息, 默认为0
+ * name string 分类名称
  *
  * @return void
  */
@@ -32,59 +38,73 @@ class CategoriesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Category->create();
 			if ($this->Category->save($this->request->data)) {
-				$this->Session->setFlash(__('The category has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$data = __("The category has been saved");
+				$this->jsonOutput($this->code_success, $data );
 			} else {
-				$this->Session->setFlash(__('The category could not be saved. Please, try again.'));
+				$errors = $this->Category->validationErrors;
+				$data = $this->formatErrorData(208001, $errors );
+				$this->jsonOutput($this->code_error, $data );
 			}
 		}
 	}
 
 /**
- * edit method
+ * 修改分类名称
  *
- * @throws NotFoundException
- * @param string $id
+ * URL：/categories/edit/{id}.json
+ * Method:POST | PUT
+ * 参数：
+ * name	string 分类名称
+ *
+ * @param string $id	要编辑 的分类ID
  * @return void
  */
 	public function edit($id = null) {
 		$this->Category->id = $id;
 		if (!$this->Category->exists()) {
-			throw new NotFoundException(__('Invalid category'));
-		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+			$data = $this->formatErrorData(208004, __("Invalid category.") );
+			$this->jsonOutput($this->code_error, $data );
+		}else if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Category->save($this->request->data)) {
-				$this->Session->setFlash(__('The category has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$data = __("The category has been saved");
+				$this->jsonOutput($this->code_success, $data );
 			} else {
-				$this->Session->setFlash(__('The category could not be saved. Please, try again.'));
+				$errors = $this->Category->validationErrors;
+				$data = $this->formatErrorData(208002, $errors['name'][0] );
+				$this->jsonOutput($this->code_error, $data );
 			}
-		} else {
-			$this->request->data = $this->Category->read(null, $id);
+		}else{
+			$data = $this->formatErrorData(208003, __("http method unsupport") );
+			$this->jsonOutput($this->code_error, $data );
+				
 		}
+				
 	}
 
 /**
- * delete method
+ * 删除区域名称
  *
- * @throws MethodNotAllowedException
- * @throws NotFoundException
+ * URL：/categories/delete/{id}.json
+ * Method:POST
+ *
  * @param string $id
  * @return void
  */
 	public function delete($id = null) {
 		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
+			$data = $this->formatErrorData(208005, __("http post method unsupport") );
+			$this->jsonOutput($this->code_error, $data );
 		}
 		$this->Category->id = $id;
 		if (!$this->Category->exists()) {
-			throw new NotFoundException(__('Invalid category'));
+			$data = $this->formatErrorData(208006, __("Invalid category") );
+			$this->jsonOutput($this->code_error, $data );
 		}
 		if ($this->Category->delete()) {
-			$this->Session->setFlash(__('Category deleted'));
-			$this->redirect(array('action' => 'index'));
+			$data = __("Category deleted");
+			$this->jsonOutput($this->code_success, $data );
 		}
-		$this->Session->setFlash(__('Category was not deleted'));
-		$this->redirect(array('action' => 'index'));
+		$data = $this->formatErrorData(208007, __("Category was not deleted") );
+		$this->jsonOutput($this->code_error, $data );
 	}
 }
