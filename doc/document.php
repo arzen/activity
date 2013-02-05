@@ -61,6 +61,7 @@ PARTITIONS 12;
 \page api  接口说明
 \tableofcontents
 \subpage area_module
+\subpage catogries_module
 \subpage user_module
 
 \page area_module  区域模块
@@ -179,6 +180,123 @@ name  | 区域名称	| String | 必填
 }
 \endcode
 
+\page catogries_module  分类模块
+\tableofcontents
+
+\section get_category_by_type 指定类型，取出该类型的所有分类名称
+调用地址：/categories/get_category_by_type.json
+
+请求方式：GET
+
+成功返回格式
+\code{.php}
+{
+    "ver": 1,
+    "code": 200,
+    "data": [
+        {
+            "id": "1",
+            "name": "体育运动",
+            "pid": "0"
+        }
+    ]
+}
+\endcode
+
+\section add_categories 新增分类名称
+调用地址：/categories/add.json
+
+请求方式：POST
+
+参数：
+
+参数名  | 描述	| 类型（精度） | 是否必填 
+------------- | ----------- | -------------| -------------
+pid  | 0为活动信息，1为优惠信息, 默认为0	| String | 否
+name  | 分类名称	| String | 必填
+
+成功返回格式
+\code{.php}
+{
+    "ver": 1,
+    "code": 200,
+    "data": "The category has been saved"
+}
+\endcode
+
+失败返回格式
+\code{.php}
+{
+    "ver": 1,
+    "code": 404,
+    "data": {
+        "err_code": 208001,
+        "msg": {
+            "name": [
+                "Must be fill up name"
+            ]
+        }
+    }
+}
+\endcode
+
+\section edit_categories 编辑分类名称
+调用地址：/categories/edit/{id}.json
+
+请求方式：POST|PUT
+
+参数：
+
+参数名  | 描述	| 类型（精度） | 是否必填 
+------------- | ----------- | -------------| -------------
+name  | 分类名称	| String | 必填
+
+成功返回格式
+\code{.php}
+{
+    "ver": 1,
+    "code": 200,
+    "data": "The category has been saved"
+}
+\endcode
+
+失败返回格式
+\code{.php}
+{
+    "ver": 1,
+    "code": 404,
+    "data": {
+        "err_code": 208004,
+        "msg": "Invalid category."
+    }
+}
+\endcode
+
+\section delete_categories 删除分类名称
+调用地址：/categories/delete/{id}.json
+
+请求方式：POST
+
+成功返回格式
+\code{.php}
+{
+    "ver": 1,
+    "code": 200,
+    "data": "Category deleted"
+}
+\endcode
+
+失败返回格式
+\code{.php}
+{
+    "ver": 1,
+    "code": 404,
+    "data": {
+        "err_code": 208007,
+        "msg": "Category was not deleted"
+    }
+}
+\endcode
 
 \page user_module  用户模块
 \tableofcontents
@@ -326,6 +444,7 @@ Respone code 的定义
 道具物品  | 05
 统计报表  | 06
 区域  | 07
+分类  | 08
 
 错误编码一览表
 
