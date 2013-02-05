@@ -10,6 +10,7 @@ class CategoriesController extends AppController {
 /**
  * 指定类型，取出该类型的所有分类名称
  * URL：/categories/get_category_by_type.json
+ * Method:GET
  * 参数：
  * t	string 0为活动信息，1为优惠信息, 默认为0
  *
@@ -103,8 +104,9 @@ class CategoriesController extends AppController {
 		if ($this->Category->delete()) {
 			$data = __("Category deleted");
 			$this->jsonOutput($this->code_success, $data );
+		}else{
+			$data = $this->formatErrorData(208007, __("Category was not deleted") );
+			$this->jsonOutput($this->code_error, $data );
 		}
-		$data = $this->formatErrorData(208007, __("Category was not deleted") );
-		$this->jsonOutput($this->code_error, $data );
 	}
 }

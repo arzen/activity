@@ -56,8 +56,8 @@ class CategoriesControllerTest extends CakeTestCase {
 		$this->markTestSkipped();
 		
 		$data = array(
-					'pid'=>1,
-					'name'=>"鞋子",
+// 					'pid'=>1,
+// 					'name'=>"鞋子",
 		);
 		$results = $this->socket->post('http://localhost/arzen/activity/src/api/categories/add.json', $data);
 		pr($results);
@@ -69,13 +69,15 @@ class CategoriesControllerTest extends CakeTestCase {
  * @return void
  */
 	public function testEdit() {
+		$this->markTestSkipped();
+		
 		$params = array(
-					//'name'=>"鞋鞋子",
+					'name'=>"鞋鞋子",
 		);
-		$results = $this->socket->post('http://localhost/arzen/activity/src/api/categories/edit/4.json', $params);
+		$results = $this->socket->post('http://localhost/arzen/activity/src/api/categories/edit/2.json', $params);
 		$data = json_decode($results);
 // 		$this->assertEquals('208002', $data->data->err_code);
-		pr($data->data);
+		pr($results);
 		
 		$params = array(
 					'name'=>"鞋鞋子",
@@ -93,6 +95,14 @@ class CategoriesControllerTest extends CakeTestCase {
  * @return void
  */
 	public function testDelete() {
+// 		$this->markTestSkipped();
+		
+		$params = array(
+		);
+		$results = $this->socket->post('http://localhost/arzen/activity/src/api/categories/delete/5.json', $params);
+		$data = json_decode($results);
+// 		$this->assertEquals('208002', $data->data->err_code);
+		pr($results);
 	}
 
 }
