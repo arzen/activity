@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 01 月 22 日 13:22
+-- 生成日期: 2013 年 02 月 08 日 16:05
 -- 服务器版本: 5.5.16
 -- PHP 版本: 5.3.8
 
@@ -45,21 +45,7 @@ CREATE TABLE IF NOT EXISTS `activities` (
   PRIMARY KEY (`id`),
   KEY `c_id` (`c_id`,`a_id`,`state`),
   KEY `end_time` (`end_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `act_categories`
---
-
-CREATE TABLE IF NOT EXISTS `act_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(40) NOT NULL COMMENT '分类名称',
-  `created` int(11) NOT NULL,
-  `updated` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动分类' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动';
 
 -- --------------------------------------------------------
 
@@ -73,7 +59,24 @@ CREATE TABLE IF NOT EXISTS `area` (
   `created` int(11) NOT NULL,
   `updated` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='区域' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='区域';
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `categories`
+--
+
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) NOT NULL COMMENT '分类名称',
+  `pid` int(11) NOT NULL COMMENT '父ID，0表示为根分类，不隶属于任何分类',
+  `type` int(11) NOT NULL DEFAULT '0' COMMENT '0为活动信息，1为优惠信息',
+  `created` int(11) NOT NULL,
+  `updated` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `type` (`type`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='活动、折扣分类';
 
 -- --------------------------------------------------------
 
@@ -98,21 +101,7 @@ CREATE TABLE IF NOT EXISTS `discounts` (
   PRIMARY KEY (`id`),
   KEY `c_id` (`c_id`,`a_id`,`state`),
   KEY `end_time` (`end_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `disc_categories`
---
-
-CREATE TABLE IF NOT EXISTS `disc_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(40) NOT NULL COMMENT '分类名称',
-  `created` int(11) NOT NULL,
-  `updated` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='打折分类' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动';
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
