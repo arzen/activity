@@ -38,7 +38,7 @@ class CategoryTest extends CakeTestCase {
 // 	}
 
 	function testAdd() {
-		$this->markTestSkipped("ddd");
+		$this->markTestSkipped();
 		$data = array(
 				'name' => '服装',
 				'pid' => 0,

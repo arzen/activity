@@ -40,20 +40,27 @@ class DiscountTest extends CakeTestCase {
 // 	}
 
 	function testAdd() {
+		$this->markTestSkipped();
 		$data = array(
 				'c_id' => 1,
 				'a_id' => 1,
-				'title' => 'Lorem ipsum dolor sit amet',
-				'content' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-				'start_time' => 1,
-				'end_time' => 1,
-				'address' => 'Lorem ipsum dolor sit amet',
+				'title' => '服装打折',
+				'content' => '东门童装打折.',
+				'start_time' => strtotime("2013-02-01 22:20"),
+				'end_time' => strtotime("2013-03-01 22:20"),
+				'address' => '罗湖区东门11号',
 				'public' => 1,
-				'gps' => 'Lorem ipsum dolor sit amet',
+				'gps' => '23.5533,94.234',
 				'state' => 1,
 				
 		);
 		$this->Discount->save($data);
 	}
-
+	
+	function testGetByACID() {
+// 		$this->markTestSkipped();
+		$fields=array('id', 'title', 'content','start_time', 'end_time');
+		$data = $this->Discount->getByACID($fields);
+		pr($data);
+	}
 }

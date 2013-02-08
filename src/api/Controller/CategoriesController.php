@@ -25,7 +25,7 @@ class CategoriesController extends AppController {
 	}
 
 /**
- * 指定类型，取出该类型的所有分类名称
+ * 新增分类名称
  * URL：/categories/add.json
  * Method:POST
  * 

@@ -115,12 +115,25 @@ class Discount extends AppModel {
 	
 	/**
 	 * 依据指定的分类ID,区域ID进行分页显示优惠信息
+	 * TODO: 分页功能没有做好
 	 * 
 	 * @return void
 	 * @author John.Meng
 	 * @date 2013-2-5
 	 */
-	function getByACID($cid=0, $aid=0, $start=0, $limit=0) {
-		;
+	function getByACID($fields=array('id', 'title', 'start_time', 'end_time'), $cid=0, $aid=0, $start=0, $limit=0) {
+		$conditions = array(
+					'fields' => $fields ,
+				);
+		if ($cid != 0) {
+			$conditions['conditions']['c_id'] = $cid;
+		}
+		if ($aid != 0) {
+			$conditions['conditions']['a_id'] = $aid;
+		}
+		$data = $this->find('all', $conditions );
+		$pattern = '{n}.'.$this->alias;
+		$data = Set::classicExtract($data,$pattern);
+		return $data;
 	}
 }
