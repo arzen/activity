@@ -12,9 +12,16 @@ class DiscountsControllerTest extends ControllerTestCase {
  *
  * @var array
  */
-	public $fixtures = array(
-		'app.discount'
-	);
+// 	public $fixtures = array(
+// 		'app.discount'
+// 	);
+
+	private $socket;
+	
+	function setup() {
+		$this->socket = new HttpSocket();
+	}
+	
 
 /**
  * testIndex method
@@ -30,6 +37,7 @@ class DiscountsControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testView() {
+		
 	}
 
 /**
@@ -38,6 +46,13 @@ class DiscountsControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testAdd() {
+		$data = array(
+				'pid'=>1,
+				'name'=>"鞋子",
+		);
+		$results = $this->socket->post('http://localhost/arzen/activity/src/api/discount/add.json', $data);
+		pr($results);
+		
 	}
 
 /**

@@ -42,13 +42,16 @@ class DiscountsController extends AppController {
  * Method:POST
  * 
  * 参数：
- * c_id	string 分类ID
- * a_id string 区域ID
+ * c_id	string 分类ID，具体ID参看 @see /categories/get_category_by_type.json
+ * a_id string 区域ID，具体ID参看 @see /areas/get_all_areas.json
  * title string 打折标题
  * content string 打折内容
  * start_time string 开始时间
  * end_time string 结果时间
  * address string 结果时间
+ * public string 是否公开
+ * gps string 优惠打折信息的具体位置
+ * state string 信息的状态，0待审核，1已审核，2已下架
  *
  *
  * @return void
@@ -58,7 +61,9 @@ class DiscountsController extends AppController {
 			$this->Discount->create();
 			if ($this->Discount->save($this->request->data)) {
 				$this->flash(__('Discount saved.'), array('action' => 'index'));
+				
 			} else {
+				
 			}
 		}
 	}
